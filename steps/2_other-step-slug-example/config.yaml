@@ -1,0 +1,4 @@
+slug: step-2
+title: Step 2
+difficulty: Beginner
+validation_type: Disabled # Disabled|Basic (Basic when step has VCFs)

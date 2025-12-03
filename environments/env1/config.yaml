@@ -1,0 +1,18 @@
+title: Lab Provisioning Block
+description: description
+type: cloud-environment # cloud-environment|remote-desktop|cli|code-ide
+vendor: aws # aws|azure|google|alibaba-cloud vendor is mandatory if type: cloud-environment|remote-desktop
+language: yaml # yaml|json|hcl2
+
+# Tags can be used to specify which subsets of accounts the lab should use to enable access to restricted services
+#tags:
+  #- bedrock
+
+# Needed when type: cli|code-ide
+#workspace_docker_image_url: "421805900968.dkr.ecr.us-east-2.amazonaws.com/cloudacademy/labs-workspace/image-name" # can set tag by appending :tag
+#content_docker_image_name: "github.com/cloudacademy/content-repo"
+#content_docker_image_tag: "tag" # optional; latest used when not specified. Tag will usually be a commit ID
+# Can use 'github.com/cloudacademy/noop-content-image-repo' for the content image if no IDE/CLI checks are required
+
+# Set the size if type: cli|code-ide
+#size: small|medium|large

@@ -1,0 +1,4 @@
+title: Security Policy
+description: descr sec policy 1
+vendor: aws # aws|azure|google|alibaba-cloud
+#custom_policy_tags: # [optional] custom security policy tags (defined in hagrid), string of comma separated values. E.g. azure-vm.mckinsey_instances_count
