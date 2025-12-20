@@ -1,8 +1,8 @@
-title: Lab Provisioning Block
-description: description
+title: Observability & Monitoring for Azure AI Agents Using Application Insights and Log Analytics
+description: Observability & Monitoring for Azure AI Agents Using Application Insights and Log Analytics
 type: cloud-environment # cloud-environment|remote-desktop|cli|code-ide
-vendor: aws # aws|azure|google|alibaba-cloud vendor is mandatory if type: cloud-environment|remote-desktop
-language: yaml # yaml|json|hcl2
+vendor: azure # aws|azure|google|alibaba-cloud vendor is mandatory if type: cloud-environment|remote-desktop
+language: hcl2 # yaml|json|hcl2
 
 # Tags can be used to specify which subsets of accounts the lab should use to enable access to restricted services
 #tags:

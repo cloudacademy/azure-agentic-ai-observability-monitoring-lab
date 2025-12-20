@@ -1,12 +1,153 @@
 {
-    "Version": "2012-10-17",
-    "Statement": [
+  "permissions": [
+    {
+      "actions": [
+        "*"
+      ],
+      "notActions": [
+        "Microsoft.Authorization/*/Delete",
+        "Microsoft.Authorization/*/Write",
+        "Microsoft.Authorization/elevateAccess/Action",
+        "Microsoft.MarketplaceOrdering/*",
+        "Microsoft.CognitiveServices/*/write",
+        "Microsoft.CognitiveServices/accounts/*/delete",
+        "Microsoft.Resources/deploymentScripts/*",
+        "Microsoft.ManagedIdentity/userAssignedIdentities/*",
+        "Microsoft.ContainerInstance/containerGroups/*",
+        "Microsoft.KeyVault/vaults/*/Write",
+        "Microsoft.KeyVault/vaults/*/Delete"
+      ],
+      "dataActions": [
+        "Microsoft.KeyVault/vaults/*",
+        "Microsoft.CognitiveServices/accounts/OpenAI/*/read",
+        "Microsoft.CognitiveServices/accounts/OpenAI/engines/completions/action",
+        "Microsoft.CognitiveServices/accounts/OpenAI/engines/search/action",
+        "Microsoft.CognitiveServices/accounts/OpenAI/engines/generate/action",
+        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/search/action",
+        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/chat/completions/action",
+        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/completions/action",
+        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/extensions/chat/completions/action",
+        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/embeddings/action"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "parameters": {
+    "allowedLocations": {
+      "type": "array",
+      "metadata": {
+        "description": "The list of locations that can be specified when deploying resources",
+        "strongType": "location",
+        "displayName": "Allowed locations"
+      }
+    },
+    "allowedServices": {
+      "type": "array",
+      "metadata": {
+        "description": "The list of allowed services",
+        "displayName": "Allowed services"
+      }
+    },
+    "allowedAISKU": {
+      "type": "array",
+      "metadata": {
+        "description": "The list of allowed AI Hub SKUs",
+        "displayName": "Allowed AI Hub SKU"
+      }
+    },
+    "allowedKeyVaultSkus": {
+      "type": "Array",
+      "metadata": {
+        "displayName": "Allowed Key Vault SKUs",
+        "description": "The list of allowed SKUs for Key Vault."
+      }
+    }
+  },
+  "displayName": "Azure AI Policy",
+  "description": "This policy restricts what is allowed in the Azure AI Lab.",
+  "policyRule": {
+    "if": {
+      "anyOf": [
         {
-            "Action": [
-                "*"
-            ],
-            "Resource": "*",
-            "Effect": "Deny"
+          "not": {
+            "field": "type",
+            "in": "[parameters('allowedServices')]"
+          }
+        },
+        {
+          "not": {
+            "field": "location",
+            "in": "[parameters('allowedLocations')]"
+          }
+        },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.CognitiveServices/accounts"
+            },
+            {
+              "not": {
+                "field": "Microsoft.CognitiveServices/accounts/sku.name",
+                "in": "[parameters('allowedAISKU')]"
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Keyvault/vaults"
+            },
+            {
+              "not": {
+                "field": "Microsoft.KeyVault/vaults/sku.name",
+                "in": "[parameters('allowedKeyVaultSkus')]"
+              }
+            }
+          ]
         }
-    ]
+      ]
+    },
+    "then": {
+      "effect": "deny"
+    }
+  },
+  "parameters_values": {
+    "allowedLocations": {
+      "value": ["WestUS", "SouthCentralUS", "{RGLocation}", "Global", "eastus"]
+    },
+    "allowedServices": {
+      "value": [
+        "Microsoft.CognitiveServices/accounts",
+        "Microsoft.CognitiveServices/accounts/deployments",
+        "Microsoft.Resources/deployments",
+        "Microsoft.Storage/storageAccounts",
+        "Microsoft.Storage/storageAccounts/blobServices/containers",
+        "Microsoft.KeyVault/vaults",
+        "Microsoft.KeyVault/vaults/secrets",
+        "Microsoft.KeyVault/vaults/accessPolicies",
+        "Microsoft.OperationalInsights/workspaces",
+        "Microsoft.Insights/diagnosticSettings",
+        "Microsoft.MachineLearningServices/workspaces",
+        "Microsoft.MachineLearningServices/workspaces/datastores",
+        "Microsoft.MachineLearningServices/workspaces/connections",
+        "Microsoft.MachineLearningServices/workspaces/connections/deployments",
+        "Microsoft.MachineLearningServices/workspaces/hubAgents",
+        "Microsoft.MachineLearningServices/workspaces/capabilityHosts",
+        "Microsoft.Authorization/roleAssignments"
+      ]
+    },
+    "allowedAISKU": {
+      "value": [
+        "S0"
+      ]
+    },
+    "allowedKeyVaultSkus": {
+      "value": [
+        "Standard"
+      ]
+    }
+  }
 }
