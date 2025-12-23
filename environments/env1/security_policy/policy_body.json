@@ -116,7 +116,7 @@
   },
   "parameters_values": {
     "allowedLocations": {
-      "value": ["WestUS", "SouthCentralUS", "{RGLocation}", "Global", "eastus"]
+      "value": ["westus", "southcentralus", "{RGLocation}", "global", "eastus"]
     },
     "allowedServices": {
       "value": [
@@ -130,13 +130,18 @@
         "Microsoft.KeyVault/vaults/accessPolicies",
         "Microsoft.OperationalInsights/workspaces",
         "Microsoft.Insights/diagnosticSettings",
+        "Microsoft.Insights/components",
         "Microsoft.MachineLearningServices/workspaces",
         "Microsoft.MachineLearningServices/workspaces/datastores",
         "Microsoft.MachineLearningServices/workspaces/connections",
         "Microsoft.MachineLearningServices/workspaces/connections/deployments",
         "Microsoft.MachineLearningServices/workspaces/hubAgents",
         "Microsoft.MachineLearningServices/workspaces/capabilityHosts",
-        "Microsoft.Authorization/roleAssignments"
+        "Microsoft.Authorization/roleAssignments",
+        "Microsoft.OperationalInsights/workspaces/sharedKeys/action",
+        "Microsoft.OperationalInsights/workspaces/dataExports",
+        "Microsoft.OperationalInsights/workspaces/providers/roleAssignments"
+
       ]
     },
     "allowedAISKU": {

@@ -1,6 +1,6 @@
 ### Introduction
 
-...
+- Create an AI agent using Microsoft Foundry Agent Service.
 
 ### Instructions
 

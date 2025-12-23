@@ -1,17 +1,17 @@
-title: Lab Test
-slug: lab-test
-short_description: Short description under 160 chars
+title: Observability & Monitoring for Azure AI Agents Using Application Insights and Log Analytics
+slug: observability-monitoring-azure-ai-agents-app-insights-log-analytics
+short_description: Create an AI agent using Microsoft Foundry Agent Service and implement observability and monitoring solutions using Application Insights and Log Analytics.
 lab_features: # cloud-environment|remote-desktop|cli|code-ide
   - cloud-environment
-duration: 7600
+duration: 2700
 #step_variables:
 #  - "required_step_var: This <strong>string</strong> will be substituted in lab steps with {LabStep.required_step_var} and available in VCFs."
 #  - "?optional_step_var: Substituted in lab steps with {LabStep.?optional_step_var} and available in VCFs. Optional step variables are not required to be defined in a lab and will be substituted with nothing in that case."
 #  - "template_output: '{{outputName|default:''waiting_for_output''}}'"
 difficulty: Beginner # Beginner|Intermediate|Advanced
 instructor: "Jun Fritz"
-environment_start_image: warning.png # relative to top-level assets/ directory
-environment_end_image: warning.png # relative to top-level assets/ directory
+# environment_start_image: warning.png # relative to top-level assets/ directory
+# environment_end_image: warning.png # relative to top-level assets/ directory
 
 is_challenge: false
 is_assessment: false # at most one of is_challenge and is_assessment may be true

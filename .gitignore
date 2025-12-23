@@ -21,7 +21,6 @@ __pycache__
 *.jar
 
 # Archive files
-*.zip
 *.tar.*
 
 # Maven
