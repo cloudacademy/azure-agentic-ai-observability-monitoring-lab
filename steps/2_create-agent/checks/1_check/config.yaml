@@ -1,6 +1,6 @@
-title: Microsoft Foundry Agent
-internal_name: Microsoft Foundry Agent
-vendor: aws # aws|azure|google|alibaba-cloud
+title: Created a Microsoft Foundry Agent
+internal_name: Created a Microsoft Foundry Agent
+vendor: azure # aws|azure|google|alibaba-cloud
 runtime: python3.9 # python3.8|python3.9
 memory: 128
 timeout: 10
