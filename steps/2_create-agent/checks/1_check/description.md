@@ -1,1 +1,1 @@
-Check if _____ has been created
+Check if a Microsoft Foundry Agent has been created in the Azure portal.
