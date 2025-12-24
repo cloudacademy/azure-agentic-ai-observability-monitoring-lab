@@ -9,7 +9,6 @@
         "Microsoft.Authorization/*/Write",
         "Microsoft.Authorization/elevateAccess/Action",
         "Microsoft.MarketplaceOrdering/*",
-        "Microsoft.CognitiveServices/*/write",
         "Microsoft.CognitiveServices/accounts/*/delete",
         "Microsoft.Resources/deploymentScripts/*",
         "Microsoft.ManagedIdentity/userAssignedIdentities/*",
