@@ -18,8 +18,6 @@
       ],
       "dataActions": [
         "Microsoft.KeyVault/vaults/*",
-        "Microsoft.CognitiveServices/accounts/write",
-        "Microsoft.CognitiveServices/accounts/projects/write",
         "Microsoft.CognitiveServices/accounts/OpenAI/*/read",
         "Microsoft.CognitiveServices/accounts/OpenAI/engines/completions/action",
         "Microsoft.CognitiveServices/accounts/OpenAI/engines/search/action",
@@ -117,7 +115,7 @@
   },
   "parameters_values": {
     "allowedLocations": {
-      "value": ["westus", "southcentralus", "{RGLocation}", "global", "eastus"]
+      "value": ["westus", "southcentralus", "{RGLocation}", "global", "eastus", "eastus2"]
     },
     "allowedServices": {
       "value": [
