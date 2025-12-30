@@ -39,6 +39,17 @@
 
     ![](assets/20251223170725.png)
 
+1. In the **Create a project** pane, enter *qa-project-###* below **Project**, replacing *###* with a unique number.
+
+1. Select the **cal-####** resource group from the **Resource group** dropdown menu, then click **Create**:
+
+    ![](assets/20251229144037.png)
+
+    Leave all other settings at their defaults. The project setup will take up to 2 minutes to complete.
+
+    Once completed, the Foundry portal will display the project dashboard:
+
+    ![](assets/20251229144301.png)
 
 ### Summary
 

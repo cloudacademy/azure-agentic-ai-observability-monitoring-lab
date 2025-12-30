@@ -26,7 +26,11 @@
         "Microsoft.CognitiveServices/accounts/OpenAI/deployments/chat/completions/action",
         "Microsoft.CognitiveServices/accounts/OpenAI/deployments/completions/action",
         "Microsoft.CognitiveServices/accounts/OpenAI/deployments/extensions/chat/completions/action",
-        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/embeddings/action"
+        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/embeddings/action",
+        "Microsoft.CognitiveServices/accounts/AIServices/agents/write",
+        "Microsoft.CognitiveServices/accounts/AIServices/agents/read",
+        "Microsoft.CognitiveServices/accounts/AIServices/evaluations/write",
+        "Microsoft.CognitiveServices/accounts/AIServices/evaluations/read"
       ],
       "notDataActions": []
     }
