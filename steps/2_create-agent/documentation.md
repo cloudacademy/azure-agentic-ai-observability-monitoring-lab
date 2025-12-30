@@ -29,9 +29,9 @@
     3. Then provide the final answer.
     ```
 
-    ![](assets/20251229153012.png)
+    ![](assets/20251229194519.png)
 
-1. Click **Save**:
+1. Click **Save** at the top of the page to save the agent instructions:
 
     ![](assets/20251229163404.png)
 
