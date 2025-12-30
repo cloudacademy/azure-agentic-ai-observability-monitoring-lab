@@ -1,20 +1,20 @@
 ### Introduction
 
-- Create an AI agent using Microsoft Foundry Agent Service.
+In this lab step, you will create a simple AI agent using the Microsoft Foundry portal. You will define the agent's instructions and interact with it to see how it responds to user queries.
 
 ### Instructions
 
 1. Click the **Start building** dropdown menu and select **Create agent**:
 
-    ![](assets/20251229152459.png)
+    ![](assets/20251229152459.png){: style="width:166px"}
 
 1. Enter *qa-agent* for the **Agent name**, then click **Create**:
 
-    ![](assets/20251229152539.png)
+    ![](assets/20251229152539.png){: style="width:503px"}
 
     Once completed, the Foundry portal will display the agent playground:
 
-    ![](assets/20251229152743.png)
+    ![](assets/20251229152743.png){: style="width:705px"}
 
 1. Enter the following instructions in the **Instructions** pane on the left:
 
@@ -29,11 +29,11 @@
     3. Then provide the final answer.
     ```
 
-    ![](assets/20251229194519.png)
+    ![](assets/20251229194519.png){: style="width:491px"}
 
 1. Click **Save** at the top of the page to save the agent instructions:
 
-    ![](assets/20251229163404.png)
+    ![](assets/20251229163404.png){: style="width:65px"}
 
 1. Message the agent by entering the following prompt in the input box at the bottom of the center pane, then clicking the **Send** button (paper airplane icon):
 
@@ -41,11 +41,11 @@
     Why would you use dashboards instead of raw logs when monitoring an application?
     ```
 
-    ![](assets/20251229161433.png)
+    ![](assets/20251229161433.png){: style="width:468px"}
 
     The agent will respond with a similar answer to the following:
 
-    ![](assets/20251229161353.png)
+    ![](assets/20251229161353.png){: style="width:435px"}
 
 1. At the bottom of the agent response, the following information is displayed:
 
@@ -57,16 +57,16 @@
 
     Hovering over the **Evaluation** score displays a tooltip explaining the score:
 
-    ![](assets/20251229163639.png)
+    ![](assets/20251229163639.png){: style="width:425px"}
 
     The task adherance and intent resolution scores indicate how well the agent followed the instructions and addressed the user's intent. These metrics can be useful for assessing and improving agent performance.
 
 1. To view more evaluation metrics for each response, click the **Metrics** dropdown menu at the top of the chat pane:
 
-    ![](assets/20251229163820.png)
+    ![](assets/20251229163820.png){: style="width:395px"}
 
-    Feel free to enable additional metrics such as **Coherence**, **Fluency**, and **Relevance** by toggling the switches next to each metric and asking the agent another question to see the updated metrics.
+    Enable additional metrics such as **Coherence**, **Fluency**, and **Relevance** by toggling the switches next to each metric and asking the agent another question to see the updated metrics.
 
 ### Summary
 
-In this lab step, ...
+In this lab step, you created an AI agent using the Microsoft Foundry portal and reviewed its response to a user query. You defined the agent's instructions and explored the evaluation metrics provided for each response.
