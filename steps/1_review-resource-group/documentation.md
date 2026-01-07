@@ -1,34 +1,33 @@
 ### Introduction
 
-In this lab step, you will explore the Azure Resource Group that was created as part of the lab environment setup. This resource group contains all the necessary resources for building, deploying, and monitoring AI agents using Microsoft Foundry Agent Service, Application Insights, and Log Analytics.
+In this lab step, you will explore the Azure Resource Group that was created as part of the lab environment setup. This resource group contains supporting resources the necessary resources for building, deploying, and monitoring AI agents using Microsoft Foundry Agent Service, Application Insights, and Log Analytics.
 
 You will also create a new project in the Foundry portal, which will serve as the foundation for building your AI agent in subsequent steps.
 
 ### Instructions
 
-1. In the Azure portal, enter *resource groups* in the search bar and select *Resource groups* from the results:
+1. In the Azure portal, enter *resource groups* in the search bar and select **Resource groups** from the results:
 
     ![](assets/20251223165349.png){: style="width:150px"}
 
-1. Click the resource group created for this lab, *cal-####-###*:
+1. Click the resource group created for this lab, **cal-####-###**:
 
     ![](assets/20251223165432.png){: style="width:111px"}
 
-    This lab will touch on several resources within this resource group, including the Microsoft Foundry Agent Service, Application Insights, and Log Analytics workspace:
+    This lab will touch on the resources within this resource group, including Application Insights, and Log Analytics workspace:
 
-    ![](assets/20251223165756.png){: style="width:580px"}
+    ![](assets/initial_resources.png)
 
-    - Microsoft Foundry Agent Service (Foundry): This service allows you to create and manage AI agents that can interact with users and other services. The Foundry portal provides tools for building, deploying, and monitoring these agents.
     - Log Analytics Workspace: The centralized repository for collecting and analyzing log data from various sources, including your AI agents. It enables you to perform advanced queries and create visualizations to gain insights into your agents' behavior.
     - Application Insights: The application performance management service that provides insights into the performance and usage of your AI agents. Application Insights stores its telemetry in a connected Log Analytics workspace, letting you query, correlate, and visualize AI agent performance data with Kusto-based analytics.
 
-1. Click the **AISerRes###** Foundry resource:
+    One last resource to note is the Foundry project itself, which you will create next. Within Foundry you will focus on the Agent Service:
 
-    ![](assets/20251223170411.png){: style="width:491px"}
+    - Microsoft Foundry Agent Service (Foundry): This service allows you to create and manage AI agents that can interact with users and other services. The Foundry portal provides tools for building, deploying, and monitoring these agents.
 
-1. Click **Go to Foundry portal** to open the Microsoft Foundry portal in a new tab:
+1. Navigate to the [Microsoft Foundry portal](https://ai.azure.com).
 
-    ![](assets/20251223170508.png){: style="width:172px"}
+    Ensure that your lab student user {Student.provider_user_name} is the active profile in the upper-right corner of the Foundry portal (if not, click **Sign in with a different account** and choose your lab user).
 
 1. Click the **New Foundry** toggle button to switch the new Foundry portal experience:
 

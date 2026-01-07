@@ -10,8 +10,8 @@ duration: 2700
 #  - "template_output: '{{outputName|default:''waiting_for_output''}}'"
 difficulty: Beginner # Beginner|Intermediate|Advanced
 instructor: "Jun Fritz"
-# environment_start_image: warning.png # relative to top-level assets/ directory
-# environment_end_image: warning.png # relative to top-level assets/ directory
+environment_start_image: before.png # relative to top-level assets/ directory
+environment_end_image: after.png # relative to top-level assets/ directory
 
 is_challenge: false
 is_assessment: false # at most one of is_challenge and is_assessment may be true

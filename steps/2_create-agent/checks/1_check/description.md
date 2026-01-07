@@ -1,1 +1,1 @@
-Check if a Microsoft Foundry Agent has been created in the Azure portal.
+Check if a Microsoft Foundry Agent has been created in the Foundry portal.
