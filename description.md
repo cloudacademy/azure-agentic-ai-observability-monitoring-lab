@@ -9,12 +9,12 @@ Upon completion of this beginner-level lab, you will be able to:
 - Create an AI agent using Microsoft Foundry Agent Service
 - Implement observability and monitoring solutions for AI agents
 - Utilize Application Insights to track AI agent performance and user interactions
-- Set up alerts and notifications for AI agent anomalies
+- Set up alerts for AI agent evaluation metrics
 
 ### Intended audience
 
-- Cloud Architects
 - AI Engineers and Developers
+- Cloud Architects
 
 ### Prerequisites
 

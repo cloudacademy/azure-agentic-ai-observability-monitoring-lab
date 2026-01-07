@@ -9,6 +9,8 @@
         "Microsoft.Authorization/*/Write",
         "Microsoft.Authorization/elevateAccess/Action",
         "Microsoft.MarketplaceOrdering/*",
+        "Microsoft.CognitiveServices/accounts/commitmentplans/write",
+        "Microsoft.CognitiveServices/capacityReservations/write",
         "Microsoft.CognitiveServices/accounts/*/delete",
         "Microsoft.Resources/deploymentScripts/*",
         "Microsoft.ManagedIdentity/userAssignedIdentities/*",
@@ -64,6 +66,27 @@
         "displayName": "Allowed Key Vault SKUs",
         "description": "The list of allowed SKUs for Key Vault."
       }
+    },
+    "allowedCognitiveServicesKinds": {
+      "type": "array",
+      "metadata": {
+        "description": "Cognitive Services account kinds that are allowed.",
+        "displayName": "Allowed Cognitive Services kinds"
+      }
+    },
+    "allowedModels": {
+      "type": "array",
+      "metadata": {
+        "description": "OpenAI Models",
+        "displayName": "Allowed OpenAI Models"
+      }
+    },
+    "kiloTokenPerMinuteQuota": {
+      "type": "Integer",
+      "metadata": {
+        "description": "The maximum allowed quota of 1000s tokens per minute for OpenAI deployments.",
+        "displayName": "1000s Token Per Minute Quota"
+      }
     }
   },
   "displayName": "Azure AI Policy",
@@ -110,6 +133,42 @@
               }
             }
           ]
+        },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.CognitiveServices/accounts"
+            },
+            {
+              "not": {
+                "field": "kind",
+                "in": "[parameters('allowedCognitiveServicesKinds')]"
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.CognitiveServices/accounts/deployments"
+            },
+            {
+              "anyOf": [
+                {
+                  "not": {
+                    "field": "Microsoft.CognitiveServices/accounts/deployments/model.name",
+                    "in": "[parameters('allowedModels')]"
+                  }
+                },
+                {
+                  "field": "Microsoft.CognitiveServices/accounts/deployments/sku.capacity",
+                  "greater": "[parameters('kiloTokenPerMinuteQuota')]"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -119,12 +178,21 @@
   },
   "parameters_values": {
     "allowedLocations": {
-      "value": ["westus", "southcentralus", "{RGLocation}", "global", "eastus", "eastus2"]
+      "value": [
+        "westus",
+        "southcentralus",
+        "{RGLocation}",
+        "global",
+        "eastus",
+        "eastus2"
+      ]
     },
     "allowedServices": {
       "value": [
         "Microsoft.CognitiveServices/accounts",
         "Microsoft.CognitiveServices/accounts/deployments",
+        "Microsoft.CognitiveServices/accounts/projects",
+        "Microsoft.CognitiveServices/accounts/projects/connections",
         "Microsoft.Resources/deployments",
         "Microsoft.Storage/storageAccounts",
         "Microsoft.Storage/storageAccounts/blobServices/containers",
@@ -134,17 +202,11 @@
         "Microsoft.OperationalInsights/workspaces",
         "Microsoft.Insights/diagnosticSettings",
         "Microsoft.Insights/components",
-        "Microsoft.MachineLearningServices/workspaces",
-        "Microsoft.MachineLearningServices/workspaces/datastores",
-        "Microsoft.MachineLearningServices/workspaces/connections",
-        "Microsoft.MachineLearningServices/workspaces/connections/deployments",
-        "Microsoft.MachineLearningServices/workspaces/hubAgents",
-        "Microsoft.MachineLearningServices/workspaces/capabilityHosts",
+        "Microsoft.Insights/scheduledQueryRules",
         "Microsoft.Authorization/roleAssignments",
         "Microsoft.OperationalInsights/workspaces/sharedKeys/action",
         "Microsoft.OperationalInsights/workspaces/dataExports",
-        "Microsoft.OperationalInsights/workspaces/providers/roleAssignments",
-        "Microsoft.CognitiveServices/accounts/projects"
+        "Microsoft.OperationalInsights/workspaces/providers/roleAssignments"
       ]
     },
     "allowedAISKU": {
@@ -156,6 +218,21 @@
       "value": [
         "Standard"
       ]
+    },
+    "allowedCognitiveServicesKinds": {
+      "value": [
+        "AIServices",
+        "OpenAI"
+      ]
+    },
+    "allowedModels": {
+      "value": [
+        "gpt-4.1"
+      ]
+    },
+    "kiloTokenPerMinuteQuota":
+    {
+      "value": 5
     }
   }
 }
