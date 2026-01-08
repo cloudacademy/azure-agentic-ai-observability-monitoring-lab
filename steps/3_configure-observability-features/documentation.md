@@ -76,7 +76,7 @@ In this lab step, you will configure observability features for your AI agent us
 1. Enable the **Continuous evaluations** toggle, configure the following settings, then click **Submit**:
 
     - **Evaluators**: Click **Add evaluators**, then select **Coherence-Evaluator** and **Fluency-Evaluator**
-    - **Sample rate** Set to *2** runs per hour
+    - **Sample rate** Set to **2** runs per hour
 
     ![](assets/20251230120846.png){: style="width:700px"}
 

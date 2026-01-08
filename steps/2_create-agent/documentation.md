@@ -34,7 +34,7 @@ In this lab step, you will create a simple AI agent using the Microsoft Foundry 
 
     ![](assets/save_as_agent.png)
 
-1. Enter *qa-agent* for the **Agent name**, then click **Create**:
+1. Enter *qa-agent-##* for the **Agent name**, replacing *##* with a unique string if neccessary, then click **Create**:
 
     ![](assets/20251229152539.png){: style="width:503px"}
 

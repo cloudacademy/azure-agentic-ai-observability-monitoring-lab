@@ -1,6 +1,6 @@
 title: Created a Microsoft Foundry Agent
 internal_name: Created a Microsoft Foundry Agent (And assign Azure AI User role to the project's managed identity)
 vendor: azure # aws|azure|google|alibaba-cloud
-runtime: python3.8 # python3.8|python3.9
+runtime: python3.13 # python3.8|python3.9
 memory: 128
 timeout: 10
