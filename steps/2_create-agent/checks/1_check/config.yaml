@@ -3,4 +3,4 @@ internal_name: Created a Microsoft Foundry Agent (And assign Azure AI User role 
 vendor: azure # aws|azure|google|alibaba-cloud
 runtime: python3.13 # python3.8|python3.9
 memory: 128
-timeout: 10
+timeout: 30
