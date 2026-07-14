@@ -16,6 +16,8 @@ In this lab step, you will connect Application Insights to the Foundry project a
 
     A pop-up with the available resources to connect will be displayed.
 
+    *Note*: If the **Add Connection** button is grayed out, refresh the page.
+
 1. Select **Application Insights** and click **Continue**:
 
     ![](./assets/image-6.png){: style="width:394px"}
@@ -116,6 +118,8 @@ In this lab step, you will connect Application Insights to the Foundry project a
     ```
     Plan a 2-day itinerary for a first-time visitor to Seattle with a budget of $200/day.
     ```
+
+    *Note*: If you encounter a rate limit error, wait a minute and try again.
 
 ### Summary
 

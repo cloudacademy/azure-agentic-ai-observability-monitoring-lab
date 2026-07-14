@@ -1,10 +1,11 @@
 import requests
-from azure.ai.projects import AIProjectClient
 from azure.identity import ClientSecretCredential
 from azure.mgmt.cognitiveservices import CognitiveServicesManagementClient
 
 
-FAILURE_HINT = "Did you connect Application Insights to the Foundry project?"
+FAILURE_HINT = (
+    "Did you connect Application Insights to the Foundry project and use the agent?"
+)
 
 
 def with_hint(result, hint=None):
@@ -19,8 +20,8 @@ def failure():
 
 
 def authorized_get(credentials, url):
-    token = credentials.get_token("https://management.azure.com/.default")
-    response = requests.get(url, headers={"Authorization": f"Bearer {token.token}"})
+    bearer_token = credentials.get_token("https://management.azure.com/.default")
+    response = requests.get(url, headers={"Authorization": f"Bearer {bearer_token.token}"})
     response.raise_for_status()
     return response.json()
 
@@ -35,6 +36,17 @@ def list_resources_by_type(credentials, subscription_id, resource_group, resourc
     return authorized_get(credentials, url).get("value", [])
 
 
+def get_resource_details(credentials, resource_id, api_versions):
+    for api_version in api_versions:
+        url = f"https://management.azure.com{resource_id}?api-version={api_version}"
+        try:
+            return authorized_get(credentials, url)
+        except Exception:
+            continue
+
+    raise RuntimeError("Unable to read resource details")
+
+
 def get_foundry_projects(credentials, subscription_id, resource_group, account_id):
     resources = list_resources_by_type(
         credentials,
@@ -42,11 +54,11 @@ def get_foundry_projects(credentials, subscription_id, resource_group, account_i
         resource_group,
         "Microsoft.CognitiveServices/accounts/projects",
     )
-    project_prefix = f"{account_id}/projects/".lower()
+    account_project_prefix = f"{account_id}/projects/".lower()
     return [
         resource
         for resource in resources
-        if resource.get("id", "").lower().startswith(project_prefix)
+        if resource.get("id", "").lower().startswith(account_project_prefix)
     ]
 
 
@@ -59,31 +71,76 @@ def list_application_insights(credentials, subscription_id, resource_group):
     )
 
 
-def list_foundry_connections(credentials, subscription_id, endpoint):
-    client = AIProjectClient(
-        credential=credentials, endpoint=endpoint, subscription_id=subscription_id
+def get_workspace_resource_id(credentials, app_insights):
+    details = get_resource_details(
+        credentials,
+        app_insights["id"],
+        ["2020-02-02", "2018-05-01-preview", "2015-05-01"],
     )
-    return list(client.connections.list())
+    workspace_id = details.get("properties", {}).get("WorkspaceResourceId")
+    if not workspace_id:
+        raise RuntimeError("Application Insights has no WorkspaceResourceId")
+    return workspace_id
 
 
-def connection_matches_app_insights(connection, app_insights_resources):
-    text = str(connection).lower()
-    app_insights_markers = (
-        "appinsights",
-        "applicationinsights",
-        "app insights",
-        "microsoft.insights/components",
+def get_workspace_customer_id(credentials, workspace_resource_id):
+    details = get_resource_details(
+        credentials,
+        workspace_resource_id,
+        ["2023-09-01", "2022-10-01", "2021-12-01-preview", "2020-08-01"],
     )
+    customer_id = details.get("properties", {}).get("customerId")
+    if not customer_id:
+        raise RuntimeError("Log Analytics workspace has no customerId")
+    return customer_id
 
-    for component in app_insights_resources:
-        component_id = component.get("id", "").lower()
-        component_name = component.get("name", "").lower()
-        if component_id and component_id in text:
-            return True
-        if component_name and component_name in text:
-            return True
 
-    return any(marker in text for marker in app_insights_markers)
+def query_workspace(credentials, workspace_customer_id):
+    token = credentials.get_token("https://api.loganalytics.io/.default")
+    url = f"https://api.loganalytics.io/v1/workspaces/{workspace_customer_id}/query"
+    query = """
+let Lookback = 2h;
+let RecentTelemetry =
+    union isfuzzy=true AppTraces, AppRequests, AppDependencies, AppEvents
+    | where TimeGenerated > ago(Lookback)
+    | extend searchable = tostring(pack_all());
+RecentTelemetry
+| summarize
+    TotalTelemetry=count(),
+    AgentSignals=countif(searchable has_any (
+        "agent",
+        "conversation",
+        "response",
+        "Foundry",
+        "Azure AI",
+        "ai.azure.com"
+    ))
+"""
+    response = requests.post(
+        url,
+        headers={
+            "Authorization": f"Bearer {token.token}",
+            "Content-Type": "application/json",
+        },
+        json={"query": query, "timespan": "PT2H"},
+    )
+    response.raise_for_status()
+    return response.json()
+
+
+def get_query_counts(query_result):
+    tables = query_result.get("tables", [])
+    if not tables:
+        return 0, 0
+
+    rows = tables[0].get("rows", [])
+    if not rows:
+        return 0, 0
+
+    try:
+        return int(rows[0][0]), int(rows[0][1])
+    except Exception:
+        return 0, 0
 
 
 def handler(event, context):
@@ -99,56 +156,52 @@ def handler(event, context):
     except Exception:
         return failure()
 
-    foundry_account = next(
-        (account for account in accounts if account.kind.lower() == "aiservices"),
-        None,
-    )
-    if not foundry_account:
+    project_account = None
+    for account in accounts:
+        if account.kind.lower() == "aiservices":
+            project_account = account
+            break
+
+    if not project_account:
         return failure()
 
     try:
         projects = get_foundry_projects(
-            credentials, subscription_id, resource_group, foundry_account.id
+            credentials, subscription_id, resource_group, project_account.id
         )
     except Exception:
         return failure()
 
-    if not projects:
+    if len(projects) == 0:
         return failure()
 
     try:
-        app_insights_resources = list_application_insights(
+        application_insights = list_application_insights(
             credentials, subscription_id, resource_group
         )
     except Exception:
         return failure()
 
-    if not app_insights_resources:
+    if len(application_insights) == 0:
         return failure()
 
-    base_endpoint = foundry_account.properties.endpoints["AI Foundry API"]
-    for project in projects:
-        project_name = project["id"].split("/projects/", 1)[1]
-        endpoint = base_endpoint + f"api/projects/{project_name}"
+    for component in application_insights:
         try:
-            connections = list_foundry_connections(credentials, subscription_id, endpoint)
+            workspace_resource_id = get_workspace_resource_id(credentials, component)
+            workspace_customer_id = get_workspace_customer_id(
+                credentials, workspace_resource_id
+            )
+            query_result = query_workspace(credentials, workspace_customer_id)
+            telemetry_count, signal_count = get_query_counts(query_result)
         except Exception:
             continue
 
-        matching_connections = [
-            connection
-            for connection in connections
-            if connection_matches_app_insights(connection, app_insights_resources)
-        ]
-        if matching_connections:
-            names = [
-                str(getattr(connection, "name", "unknown"))
-                for connection in matching_connections
-            ]
+        if telemetry_count > 0:
             return with_hint(
                 True,
-                f"Found Application Insights connection on project {project_name}: "
-                f"{', '.join(names)}.",
+                f"Found Application Insights telemetry in {component.get('name')}: "
+                f"{telemetry_count} records in the last 2 hours, "
+                f"including {signal_count} agent-like records.",
             )
 
     return failure()
