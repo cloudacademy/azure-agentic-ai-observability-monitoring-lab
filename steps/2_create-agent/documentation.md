@@ -8,7 +8,7 @@ In this lab step, you will connect Application Insights to the Foundry project a
 
     ![](./assets/image-2.png){: style="width:382px"}
 
-1. On the project admin page, select **Connected resources**, then click **Add connection** tab:
+1. On the project admin page, select **Connected resources** tab, then click **Add connection** button:
 
     ![](./assets/image-4.png){: style="width:449px"}
 
@@ -24,7 +24,7 @@ In this lab step, you will connect Application Insights to the Foundry project a
 
     ![](./assets/image-7.png){: style="width:394px"}
 
-    Once connected, Foundry will begin sending agent traces to Application Insights. The connection will be listed udner **Add connection** tab:
+    Once connected, Foundry will begin sending agent traces to Application Insights. The connection will be listed under **Connected resources** tab:
 
     ![](./assets/image-8.png){: style="width:443px"}
 
