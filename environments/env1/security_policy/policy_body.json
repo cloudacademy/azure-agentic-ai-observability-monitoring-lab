@@ -2,7 +2,9 @@
   "permissions": [
     {
       "actions": [
-        "*"
+        "*",
+        "Microsoft.Insights/components/read",
+        "Microsoft.Insights/components/write"
       ],
       "notActions": [
         "Microsoft.Authorization/*/Delete",
@@ -11,6 +13,12 @@
         "Microsoft.MarketplaceOrdering/*",
         "Microsoft.CognitiveServices/accounts/commitmentplans/write",
         "Microsoft.CognitiveServices/capacityReservations/write",
+        "Microsoft.CognitiveServices/accounts/listKeys/action",
+        "Microsoft.CognitiveServices/accounts/regenerateKey/action",
+        "Microsoft.CognitiveServices/accounts/deployments/write",
+        "Microsoft.CognitiveServices/accounts/deployments/delete",
+        "Microsoft.CognitiveServices/accounts/raiPolicies/*",
+        "Microsoft.CognitiveServices/accounts/raiBlocklists/*",
         "Microsoft.CognitiveServices/accounts/*/delete",
         "Microsoft.Resources/deploymentScripts/*",
         "Microsoft.ManagedIdentity/userAssignedIdentities/*",
@@ -19,22 +27,26 @@
         "Microsoft.KeyVault/vaults/*/Delete"
       ],
       "dataActions": [
-        "Microsoft.KeyVault/vaults/*",
         "Microsoft.CognitiveServices/accounts/OpenAI/*/read",
-        "Microsoft.CognitiveServices/accounts/OpenAI/engines/completions/action",
-        "Microsoft.CognitiveServices/accounts/OpenAI/engines/search/action",
-        "Microsoft.CognitiveServices/accounts/OpenAI/engines/generate/action",
-        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/search/action",
         "Microsoft.CognitiveServices/accounts/OpenAI/deployments/chat/completions/action",
-        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/completions/action",
         "Microsoft.CognitiveServices/accounts/OpenAI/deployments/extensions/chat/completions/action",
-        "Microsoft.CognitiveServices/accounts/OpenAI/deployments/embeddings/action",
-        "Microsoft.CognitiveServices/accounts/AIServices/agents/write",
+        "Microsoft.CognitiveServices/accounts/AIServices/connections/read",
         "Microsoft.CognitiveServices/accounts/AIServices/agents/read",
+        "Microsoft.CognitiveServices/accounts/AIServices/agents/write",
+        "Microsoft.CognitiveServices/accounts/AIServices/evaluations/read",
         "Microsoft.CognitiveServices/accounts/AIServices/evaluations/write",
-        "Microsoft.CognitiveServices/accounts/AIServices/evaluations/read"
+        "Microsoft.CognitiveServices/accounts/AIServices/responses/read",
+        "Microsoft.CognitiveServices/accounts/AIServices/responses/write",
+        "Microsoft.CognitiveServices/accounts/AIServices/jobs/read",
+        "Microsoft.CognitiveServices/accounts/AIServices/jobs/write",
+        "Microsoft.CognitiveServices/accounts/AIServices/jobs/cancel/action",
+        "Microsoft.CognitiveServices/accounts/AIServices/jobs/metrics/read",
+        "Microsoft.CognitiveServices/accounts/AIServices/jobs/history/runs/read"
       ],
-      "notDataActions": []
+      "notDataActions": [
+        "Microsoft.CognitiveServices/accounts/AIServices/fine_tuning/write",
+        "Microsoft.CognitiveServices/accounts/AIServices/managedComputeDeployments/write"
+      ]
     }
   ],
   "parameters": {
@@ -227,7 +239,8 @@
     },
     "allowedModels": {
       "value": [
-        "gpt-4.1"
+        "gpt-4.1",
+        "gpt-5-mini"
       ]
     },
     "kiloTokenPerMinuteQuota":

@@ -6,59 +6,37 @@ In this lab step, you will configure observability features for your AI agent us
 
 1. Click the **Traces** tab in the **qa-agent** view:
 
-    ![](assets/20251230112913.png){: style="width:149px"}
+    ![](./assets/image-1.png){: style="width:271px"}
 
     Foundry traces make AI agent behavior visible by showing each step, tool call, and decision an agent takes during execution. This visibility helps teams quickly debug failures, understand why an agent behaved a certain way, and pinpoint performance bottlenecks. By tying outcomes to internal steps, traces turn opaque agent workflows into actionable insights.
 
     Foundry emits agent traces using OpenTelemetry and sends them to a connected Azure Application Insights resource. Application Insights then stores, queries, visualizes, and correlates these traces with logs, metrics, and errors for end-to-end observability.
 
-    *Note*: You may see a 404 message above the traces which should go away over time and can be ignored for this lab.
-
-1. Click **Connect** at the top of the page to connect an Application Insights resource to enable tracing:
-
-    ![](assets/20251230113403.png){: style="width:70px"}
-
-1. Select the **insights-###** Application Insights resource from the dropdown menu, then click **Connect**:
-
-    ![](assets/20251230113449.png){: style="width:348px"}
-
-    Once connected, Foundry will begin sending agent traces to Application Insights.
-
-1. Click the **Playground** tab to return to the agent playground, and ask the agent the following question in the chat input:
-
-    ```
-    Plan a 2-day itinerary for a first-time visitor to Seattle with a budget of $200/day.
-    ```
-
-    ![](assets/20251230113743.png){: style="width:474px"}
-
-    A few moments after the response is generated, Foundry will emit traces for the agent execution to Application Insights.
-
 1. Return to the **Traces** tab, and you should see a new trace for the recent agent execution:
 
-    ![](assets/20251230114034.png){: style="width:796px"}
+    ![](./assets/image-3.png){: style="width:620px"}
 
     *Note*: It may take a minute or two for the trace ID to appear but it will eventually show up.
 
 1. Click the **Trace ID** of the latest trace entry to view detailed information about the agent's response:
 
-    ![](assets/20251230114123.png){: style="width:103px"}
+    ![](./assets/image-4.png){: style="width:130px"}
 
-    A trace view displays a timeline of all the steps the agent took to generate its response, including tool calls, reasoning steps, and final answers. This detailed trace helps you understand the agent's decision-making process and identify any potential issues.
+    The trace view displays a timeline of the agent run, including the agent invocation, model call, timing, input, and output. This view helps you understand how the response was generated and identify where time was spent or where issues may have occurred.
 
-    ![](assets/20251230114241.png){: style="width:1127px"}
+    ![](./assets/image-5.png){: style="width:620px"}
 
-    In the example above, the agent is only using its internal reasoning capabilities (LLM) without calling any external tools. In more complex scenarios, you may see additional spans representing calls to external APIs or services.
+    In the example above, the agent uses only the language model to generate its response and does not call any external tools. In more complex scenarios, the trace may include additional spans for tool calls, API requests, or other services used by the agent.
 
-    Stepping through the trace spans provides insights into how the agent arrived at its final answer, allowing you to debug and optimize its behavior effectively.
+    Stepping through the trace spans helps you review the agent run, including the model call, timing, inputs, outputs, and any tool or service calls. This can help you debug issues and understand where the agent’s behavior or performance can be improved.
 
 1. Exit out of the trace entry and click the **Monitor** tab at the top of the page:
 
-    ![](assets/20251230114550.png){: style="width:68px"}
+    ![](./assets/image-6.png){: style="width:205px"}
 
     The Monitor tab provides an overview of key performance metrics for your AI agent, including Agent runs, Runs and token metrics, tool calls, and error rates. This information helps you track the health and performance of your agent over time.
 
-    ![](assets/20251230114532.png){: style="width:952px"}
+    ![](./assets/image-7.png){: style="width:620px"}
 
     In addition to monitoring, Foundry also provides automated agent evaluations.
 
@@ -78,7 +56,7 @@ In this lab step, you will configure observability features for your AI agent us
     - **Evaluators**: Click **Add evaluators**, then select **Coherence-Evaluator** and **Fluency-Evaluator**
     - **Sample rate** Set to **2** runs per hour
 
-    ![](assets/20251230120846.png){: style="width:700px"}
+    ![](./assets/image-8.png){: style="width:620px"}
 
     Once enabled, Foundry will begin automatically evaluating agent responses using the selected evaluators. You can view evaluation results in the agent playground and set up alerts based on evaluation scores.
 
@@ -88,7 +66,7 @@ In this lab step, you will configure observability features for your AI agent us
 
 1. Click **Evaluation Alerts**, and set the toggle slider to enabled:
 
-    ![](assets/eval_alerts.png)
+    ![](./assets/image-9.png){: style="width:620px"}
 
     The default threshold and look back window will suffice for this lab but can be configured based on your specific tolerances in practice.
 
@@ -98,13 +76,13 @@ In this lab step, you will configure observability features for your AI agent us
 
 1. Return to your Azure portal browser tab opened to the lab's resource group, and refresh the resources list:
 
-    ![](assets/rg_resources.png)
+    ![](./assets/image-9-1.png){: style="width:395px"}
 
     The log search rule beginning with **evalpassrate** was created when you enabled evaluation alerts in Foundry.
 
 1. Click the log search rule to view its details, and expand the **Query** at the bottom:
 
-    ![](assets/query.png)
+    ![](./assets/image-9-2.png){: style="width:620px"}
 
     This shows the Kusto Query Language (KQL) query that runs on the connected Log Analytics workspace to evaluate agent performance and trigger alerts when evaluation scores fall below the defined threshold. Fully understanding the query is out of scope for this lab, but you can see Foundry agents transmit custom events (the `customEvents` table is queried) with the name `gen_ai.evaluation.result` containing evaluation results.
 
@@ -114,11 +92,11 @@ In this lab step, you will configure observability features for your AI agent us
 
 1. Click the table icon on the left to view available tables, then click **Run** next to **customEvents**:
 
-    ![](assets/run_customEvents.png)
+    ![](./assets/image-9-3.png){: style="width:323px"}
 
 1. Expand one of the rows and all of its nested properties (**customDimensions** and **internal_properties**) in the results to inspect the full event:
 
-    ![](assets/exampleEvent.png)
+    ![](./assets/image-9-4.png){: style="width:620px"}
 
     The **gen_ai.evaluation.score.value** and **gen_ai.evaluation.testing_criteria.name** properties are of particular interest, as they contain the evaluation score and the name of the evaluation criteria (e.g., Coherence, Fluency) for each evaluation result transmitted by Foundry.
 
@@ -128,6 +106,6 @@ In this lab step, you configured observability features for your AI agent using 
 
 By completing this lab, you have successfully:
 
-- Created a Microsoft Foundry project and AI agent
+- Reviewed the Microsoft Foundry project and created an AI agent
 - Configured observability features using Application Insights and Log Analytics
 - Covered monitoring and alerting for an AI agent

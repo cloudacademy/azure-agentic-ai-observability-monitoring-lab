@@ -2,55 +2,41 @@
 
 In this lab step, you will explore the Azure Resource Group that was created as part of the lab environment setup. This resource group contains supporting resources the necessary resources for building, deploying, and monitoring AI agents using Microsoft Foundry Agent Service, Application Insights, and Log Analytics.
 
-You will also create a new project in the Foundry portal, which will serve as the foundation for building your AI agent in subsequent steps.
-
 ### Instructions
 
 1. In the Azure portal, enter *resource groups* in the search bar and select **Resource groups** from the results:
 
-    ![](assets/20251223165349.png){: style="width:150px"}
+    ![](./assets/image-1.png){: style="width:189px"}
 
 1. Click the resource group created for this lab, **cal-####-###**:
 
-    ![](assets/20251223165432.png){: style="width:111px"}
+    ![](./assets/image-2.png){: style="width:189px"}
 
-    This lab will touch on the resources within this resource group, including Application Insights, and Log Analytics workspace:
+    This lab will touch on the resources within this resource group, including Application Insights, Log Analytics workspace and MS Foundry resources:
 
-    ![](assets/initial_resources.png)
+    ![](./assets/image-4.png){: style="width:378px"}
 
-    - Log Analytics Workspace: The centralized repository for collecting and analyzing log data from various sources, including your AI agents. It enables you to perform advanced queries and create visualizations to gain insights into your agents' behavior.
+    - Foundry: The unified Microsoft Foundry resource that provides the core AI platform capabilities for building and operating AI agents, models, and tools. It hosts shared settings such as deployments, networking, security, and connected tools.
+    - Foundry project: A project-scoped workspace within a Foundry resource used to organize AI development assets such as agents, model deployments, evaluations, traces, datasets, indexes, and connections. Foundry projects are Azure child resources of the parent Foundry resource.
     - Application Insights: The application performance management service that provides insights into the performance and usage of your AI agents. Application Insights stores its telemetry in a connected Log Analytics workspace, letting you query, correlate, and visualize AI agent performance data with Kusto-based analytics.
+    - Log Analytics Workspace: The centralized repository for collecting and analyzing log data from various sources, including your AI agents. It enables you to perform advanced queries and create visualizations to gain insights into your agents' behavior.
+    
 
-    One last resource to note is the Foundry project itself, which you will create next. Within Foundry you will focus on the Agent Service:
+1. Navigate to the [Microsoft Foundry portal](https://ai.azure.com) and click **Start building** button in the upper-right corner:
 
-    - Microsoft Foundry Agent Service (Foundry): This service allows you to create and manage AI agents that can interact with users and other services. The Foundry portal provides tools for building, deploying, and monitoring these agents.
+    ![](./assets/image-5.png){: style="width:120px"}
 
-1. Navigate to the [Microsoft Foundry portal](https://ai.azure.com).
+    If required, sign in with your student credentials.
 
-    Ensure that your lab student user {Student.provider_user_name} is the active profile in the upper-right corner of the Foundry portal (if not, click **Sign in with a different account** and choose your lab user).
+1. Select the only available project:
 
-1. Click the **New Foundry** toggle button to switch the new Foundry portal experience:
+    ![](./assets/image-8.png){: style="width:382px"}
 
-    ![](assets/20251223170634.png){: style="width:140px"}
+    You will be presented with the Microsoft Foundry homepage:
 
-    You will be prompted to select or create a project.
+    ![](./assets/image-7.png){: style="width:620px"}
 
-1. Select **Create a new project** from the dropdown menu:
-
-    ![](assets/20251223170725.png){: style="width:616px"}
-
-1. In the **Create a project** pane, enter *qa-project-###* below **Project**, replacing *###* with a unique number.
-
-1. Select the **cal-####** resource group from the **Resource group** dropdown menu, then click **Create**:
-
-    ![](assets/20251229144037.png){: style="width:613px"}
-
-    Leave all other settings at their defaults. The project setup will take up to 2 minutes to complete.
-
-    Once completed, the Foundry portal will display the project dashboard:
-
-    ![](assets/20251229144301.png){: style="width:1030px"}
 
 ### Summary
 
-In this lab step, you reviewed the Azure Resource Group created for the lab environment and created a new project in the Microsoft Foundry portal.
+In this lab step, you reviewed the Azure resource group created for the lab environment and signed in to the Microsoft Foundry portal.

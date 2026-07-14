@@ -24,4 +24,8 @@ Familiarity with the following will be beneficial but is not required:
 
 The following content can be used to fulfill the prerequisites:
 
-- [Explore the Components and Tools of the Azure AI Foundry](https://platform.qa.com/lab/explore-the-components-and-tools-of-azure-ai-foundry/)
+- [Explore the Components and Tools of the Azure AI Foundry](/lab/explore-the-components-and-tools-of-azure-ai-foundry/)
+
+### Updates
+
+Jul 14th, 2026 - Updated documentation and screenshots to reflect the latest UI

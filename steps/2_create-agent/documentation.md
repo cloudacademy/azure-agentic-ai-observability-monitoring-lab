@@ -1,46 +1,64 @@
 ### Introduction
 
-In this lab step, you will create a simple AI agent using the Microsoft Foundry portal. You will define the agent's instructions and interact with it to see how it responds to user queries.
+In this lab step, you will connect Application Insights to the Foundry project and use the pre-deployed model in the Microsoft Foundry portal to create a simple AI agent. You will define the agent's instructions and interact with it to see how it responds to user queries.
 
 ### Instructions
 
-1. Click the **Start building** dropdown menu and select **Browse models**:
+1. Click the project name in the top-left corner, then select **Project details** from the drop-down menu:
 
-    ![](assets/browse_models.png)
+    ![](./assets/image-2.png){: style="width:382px"}
 
-1. In the models search bar, enter *gpt-4.1* and click the **gpt-4.1** model search result:
+1. On the project admin page, select **Connected resources**, then click **Add connection** tab:
 
-    ![](assets/model_search.png)
+    ![](./assets/image-4.png){: style="width:449px"}
 
-    A page summarizing the capabilities of the model will be displayed.
+    ![](./assets/image-5.png){: style="width:141px"}
 
-1. In the top-right corner, click **Deploy** > **Custom settings**:
+    A pop-up with the available resources to connect will be displayed.
 
-    ![](assets/deploy_custom.png)
+1. Select **Application Insights** and click **Continue**:
 
-    The QA lab environment requires a custom configuration for the model deployment to succeed.
+    ![](./assets/image-6.png){: style="width:394px"}
 
-1. In the **Deploy gpt-4.1** blade, configure the following (leaving the others at their defaults):
+    In the **Create a new connection** window, select the pre-deployed Application Insights resource and click **Connect**:
 
-    - **Tokens per minute rate limit**: Enter *5000*
+    ![](./assets/image-7.png){: style="width:394px"}
 
-    ![](assets/deploy_config.png)
+    Once connected, Foundry will begin sending agent traces to Application Insights. The connection will be listed udner **Add connection** tab:
 
-1. Click **Deploy**.
+    ![](./assets/image-8.png){: style="width:443px"}
 
-    After a brief delay, the playground for the model deployment is displayed.
+1. Click **Discover** in the top-right menu, then select **Models** from the left-hand menu:
 
-1. In the upper-right corner, click **Save as agent**:
+    ![](./assets/image-9-1.png){: style="width:316px"}
 
-    ![](assets/save_as_agent.png)
+    ![](./assets/image-9-2.png){: style="width:184px"}
 
-1. Enter *qa-agent-##* for the **Agent name**, replacing *##* with a unique string if neccessary, then click **Create**:
+1. In the search bar, type *gpt-5-mini*, then select the **gpt-5-mini** model from the results:
 
-    ![](assets/20251229152539.png){: style="width:503px"}
+    ![](./assets/image-9-4.png){: style="width:347px"}
+
+    The **gpt-5-mini** model overview page is displayed:
+
+    ![](./assets/image-9-6.png){: style="width:620px"}
+
+    Clicking the **Deploy** button gives you options to preconfigure the model with custom settings before deployment. 
+    
+    For this lab, the model has already been provisioned. Click **Deploy** > **chat-model**:
+
+    ![](./assets/image-9-7.png){: style="width:331px"}
+
+    The model playground will load.
+
+1. Click on **Save as agent** button and enter *qa-agent-##* for the **Agent name**, replacing *##* with a unique string if neccessary, then click **Create and open playground**:
+
+    ![](./assets/image-9-8.png){: style="width:126px"}
+
+    ![](./assets/image-9-9.png){: style="width:447px"}
 
     Once completed, the Foundry portal will display the agent playground:
 
-    ![](assets/20251229152743.png){: style="width:705px"}
+    ![](./assets/image-9-10.png){: style="width:620px"}
 
 1. Enter the following instructions in the **Instructions** pane on the left:
 
@@ -55,11 +73,11 @@ In this lab step, you will create a simple AI agent using the Microsoft Foundry 
     3. Then provide the final answer.
     ```
 
-    ![](assets/20251229194519.png){: style="width:491px"}
+    ![](./assets/image-9-11.png){: style="width:449px"}
 
 1. Click **Save** at the top of the page to save the agent instructions:
 
-    ![](assets/20251229163404.png){: style="width:65px"}
+    ![](assets/20251229163404.png){: style="width:70px"}
 
 1. Message the agent by entering the following prompt in the input box at the bottom of the center pane, then clicking the **Send** button (paper airplane icon):
 
@@ -67,7 +85,7 @@ In this lab step, you will create a simple AI agent using the Microsoft Foundry 
     Why would you use dashboards instead of raw logs when monitoring an application?
     ```
 
-    ![](assets/20251229161433.png){: style="width:468px"}
+    ![](assets/20251229161433.png){: style="width:449px"}
 
     The agent will respond with a similar answer to the following:
 
@@ -75,28 +93,33 @@ In this lab step, you will create a simple AI agent using the Microsoft Foundry 
 
 1. At the bottom of the agent response, the following information is displayed:
 
-    - **Model**: The AI model used to generate the response (e.g., gpt-4.1)
-    - **Response time**: The time taken to generate the response
+    - **Model deployment**: The deployed model name used to generate the response
+    - **Response time**: The time taken to generate the response, such as **6.5s**
     - **Tokens used**: The number of tokens consumed for the request and response
-    - **Evaluation**: AI quality score for the response
-    - **Debug**: Additional technical details about the response generation
+    - **Message**: Indicates that the item shown is a chat message response
+    - **Traces**: Opens the trace details for the request, where you can inspect the execution flow and related telemetry
 
-    Hovering over the **Evaluation** score displays a tooltip explaining the score:
+    ![](./assets/image-9-13.png){: style="width:412px"}
 
-    ![](assets/20251229163639.png){: style="width:425px"}
-
-    The task adherence and intent resolution scores indicate how well the agent followed the instructions and addressed the user's intent. These metrics can be useful for assessing and improving agent performance.
-
-1. To view more evaluation metrics for each response, click the **Metrics** dropdown menu at the top of the chat pane:
+1. To view evaluation metrics for each response, click the **Metrics** dropdown menu at the top of the chat pane:
 
     ![](assets/20251229163820.png){: style="width:395px"}
+
+    The **Task adherence** and **Intent resolution** scores indicate how well the agent followed the instructions and addressed the user's intent. These metrics can be useful for assessing and improving agent performance.
 
     Enable additional metrics such as **Coherence**, **Fluency**, and **Relevance** by toggling the switches next to each metric and asking the agent another question to see the updated metrics.
 
     *Note*: Each evaluation metric increases the number of tokens used which impacts model cost and may be rate-limited.
 
-1. Ensure only the **Task adherence** and **Intent resolution** metrics are enabled before continuing to the next lab step.
+1. Ensure that only the **Task adherence** and **Intent resolution** metrics are enabled, then run another prompt:
+
+    ```
+    Plan a 2-day itinerary for a first-time visitor to Seattle with a budget of $200/day.
+    ```
 
 ### Summary
 
-In this lab step, you created an AI agent using the Microsoft Foundry portal and reviewed its response to a user query. You defined the agent's instructions and explored the evaluation metrics provided for each response.
+In this lab step, you created an AI agent using the Microsoft Foundry portal and reviewed its response to a user query.
+
+
+
