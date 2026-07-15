@@ -79,7 +79,7 @@ resource "azurerm_cognitive_deployment" "chat_model" {
 
   model {
     format  = "OpenAI"
-    name    = "gpt-5-mini"
+    name    = "gpt-5-nano"
     version = "2025-08-07"
   }
 
