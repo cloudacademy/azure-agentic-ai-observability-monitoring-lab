@@ -41,12 +41,13 @@ resource "random_id" "suffix" {
 
 locals {
   azure_ai_name = "qa-ai-${lower(random_id.suffix.hex)}"
+  lab_location  = "southcentralus"
   project_name  = "qa-proj-${lower(random_id.suffix.hex)}"
 }
 
 resource "azurerm_cognitive_account" "airesource" {
   name                = local.azure_ai_name
-  location            = data.azurerm_resource_group.current.location
+  location            = local.lab_location
   resource_group_name = data.azurerm_resource_group.current.name
   kind                = "AIServices"
 
@@ -63,7 +64,7 @@ resource "azurerm_cognitive_account" "airesource" {
 resource "azurerm_cognitive_account_project" "project" {
   name                 = local.project_name
   cognitive_account_id = azurerm_cognitive_account.airesource.id
-  location             = data.azurerm_resource_group.current.location
+  location             = local.lab_location
   display_name         = "Lab Project"
   description          = "Default lab project for Microsoft Foundry."
 
@@ -102,7 +103,7 @@ resource "azurerm_role_assignment" "ai_account_identity_foundry_user" {
 
 resource "azurerm_log_analytics_workspace" "observability" {
   name                = "logs-${lower(random_id.suffix.hex)}"
-  location            = data.azurerm_resource_group.current.location
+  location            = local.lab_location
   resource_group_name = data.azurerm_resource_group.current.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
@@ -111,7 +112,7 @@ resource "azurerm_log_analytics_workspace" "observability" {
 
 resource "azurerm_application_insights" "observability" {
   name                = "insights-${lower(random_id.suffix.hex)}"
-  location            = data.azurerm_resource_group.current.location
+  location            = local.lab_location
   resource_group_name = data.azurerm_resource_group.current.name
   application_type    = "web"
   workspace_id        = azurerm_log_analytics_workspace.observability.id
