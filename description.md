@@ -28,4 +28,6 @@ The following content can be used to fulfill the prerequisites:
 
 ### Updates
 
+August 11th, 2026 - Updated instructions for improved clarity and updated recurring evaluation creation process
+
 Jul 14th, 2026 - Updated documentation and screenshots to reflect the latest UI

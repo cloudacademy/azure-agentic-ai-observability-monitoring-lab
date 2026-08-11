@@ -46,25 +46,49 @@ In this lab step, you will configure observability features for your AI agent us
 
     With an Application Insights resource connected, you can enable automated evaluations for your AI agent. These evaluations use AI models to assess the quality of agent responses based on criteria such as relevance, coherence, and fluency.
 
-    - **Continuous evaluations**: Automatically evaluates agent responses in near-real time as the agent is used, scoring outputs for quality, safety, or correctness. This provides an always-on signal of agent health and helps catch regressions or drift early.
-    - **Scheduled evaluations**: Runs predefined evaluation suites on a fixed schedule (for example, daily or weekly) using consistent prompts and datasets. This lets you track performance trends over time and compare agent behavior across versions.
+    - Two types of **Recurring evaluations** are available:
+        - **Scheduled evaluations**: Runs predefined evaluation suites on a fixed schedule (for example, daily or weekly) using consistent prompts and datasets. This lets you track performance trends over time and compare agent behavior across versions.
+        - **Continuous evaluations**: Automatically evaluates agent responses in near-real time as the agent is used, scoring outputs for quality, safety, or correctness. This provides an always-on signal of agent health and helps catch regressions or drift early.
     - **Scheduled red teaming runs**: Executes adversarial or stress-test scenarios on a schedule to probe safety, robustness, and policy compliance. These runs help uncover edge cases, misuse risks, and failure modes before they appear in real usage.
     - **Evaluation alerts**: Trigger notifications when evaluation scores cross defined thresholds or degrade unexpectedly. Alerts turn evaluation results into actionable signals so teams can respond quickly to quality, safety, or reliability issues.
 
-1. Enable the **Continuous evaluations** toggle, configure the following settings, then click **Submit**:
+1. Click **Recurring evaluations** followed by **Create recurring evaluation**:
 
-    - **Evaluators**: Click **Add evaluators**, then select **Coherence-Evaluator** and **Fluency-Evaluator**
-    - **Sample rate** Set to **2** runs per hour
+    ![](assets/createRecurring.png){: style="width:629px"}
 
-    ![](./assets/image-8.png){: style="width:620px"}
+1. Click **Next** to leave your agent selected as the target:
 
-    Once enabled, Foundry will begin automatically evaluating agent responses using the selected evaluators. You can view evaluation results in the agent playground and set up alerts based on evaluation scores.
+    ![](assets/targetAgent.png){: style="width:707px"}
 
-    ![](assets/20251230120911.png){: style="width:371px"}
+1. Click **Next** to leave the scope set to **Individual turns** which is suitable for single response agents:
 
-    *Note*: The Azure AI User role is automatically assigned to the Foundry project managed identity when running the previous lab step's validation check. This is a requirement for continuous evaluations. It may take a few minutes for the role assignment to propagate before enabling evaluations. If you see a warning, you can safely ignore it and proceed.
+    ![](assets/turnsSelectiong.png){: style="width:959px"}
 
-1. Click **Evaluation Alerts**, and set the toggle slider to enabled:
+1. Before clicking **Next**, ensure the frequency is set to **Recurring** > **Scheduled** which will run hourly by default:
+
+    ![](assets/scheduledEvals.png){: style="width:1003px"}
+
+1. Click **Remove All** next to the **Agents** and **Quality** criteria sections, and the **ProtectedMaterial** criteria from the **Safety** section:
+
+    ![](assets/criteria.png){: style="width:485px"}
+
+    This will ensure that the evaluation focuses on safety and avoids having to individually configure other criteria types for simplicity.
+
+1. Click **Next**.
+
+1. Enter *eval-safety* as the **Evaluation name** before clicking **Submit**:
+
+    ![](assets/evalSubmit.png){: style="width:485px"}
+
+    *Note*: The Azure AI User role is automatically assigned to the Foundry project managed identity when running the previous lab step's validation check. This is a requirement for recurring evaluations. It may take a few minutes for the role assignment to propagate before enabling evaluations. If you see a warning, you can safely ignore it and proceed.
+
+1. Return to your agent's **Monitor** tab by clicking **Agents** in the left sidebar, selecting your agent, and clicking **Monitor** at the top of the page.
+
+1. Click **Settings** above the metrics dashboard, then click **Evaluation Alerts**:
+
+    ![](assets/evalAlerts.png){: style="width:723px"}
+
+1. Set the toggle slider to enabled:
 
     ![](./assets/image-9.png){: style="width:620px"}
 
@@ -90,7 +114,7 @@ In this lab step, you will configure observability features for your AI agent us
 
     There won't be any evaluation results yet since you just enabled continuous evaluations, but you can inspect the events that are transmitted.
 
-1. Click the table icon on the left to view available tables, then click **Run** next to **customEvents**:
+1. Close the **Queries hub** pop-up if it appears, and click the table icon on the left to view available tables, then click **Run** next to **customEvents**:
 
     ![](./assets/image-9-3.png){: style="width:323px"}
 

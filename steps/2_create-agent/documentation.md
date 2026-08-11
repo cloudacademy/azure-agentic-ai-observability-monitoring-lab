@@ -36,23 +36,23 @@ In this lab step, you will connect Application Insights to the Foundry project a
 
     ![](./assets/image-9-2.png){: style="width:184px"}
 
-1. In the search bar, type *gpt-5-mini*, then select the **gpt-5-mini** model from the results:
+1. In the search bar, type *gpt-5-nano*, then select the **gpt-5-nano** model from the results:
 
-    ![](./assets/image-9-4.png){: style="width:347px"}
+    ![](assets/gpt-5-nano.png){: style="width:284px"}
 
-    The **gpt-5-mini** model overview page is displayed:
+    The **gpt-5-nano** model overview page is displayed:
 
-    ![](./assets/image-9-6.png){: style="width:620px"}
+    ![](assets/modelOverview.png){: style="width:963px"}
 
-    Clicking the **Deploy** button gives you options to preconfigure the model with custom settings before deployment. 
-    
-    For this lab, the model has already been provisioned. Click **Deploy** > **chat-model**:
+    Clicking the **Deploy** button gives you options to preconfigure the model with custom settings before deployment.
+
+    For this lab, the model has already been provisioned so you do not need to deploy one. Click **Deploy** > **chat-model** under **Use an existing deployment**:
 
     ![](./assets/image-9-7.png){: style="width:331px"}
 
     The model playground will load.
 
-1. Click on **Save as agent** button and enter *qa-agent-##* for the **Agent name**, replacing *##* with a unique string if neccessary, then click **Create and open playground**:
+1. Click on **Save as agent** button and enter *qa-agent-##* for the **Agent name**, replacing *##* with a unique string if necessary, then click **Create and open playground**:
 
     ![](./assets/image-9-8.png){: style="width:126px"}
 
@@ -119,11 +119,8 @@ In this lab step, you will connect Application Insights to the Foundry project a
     Plan a 2-day itinerary for a first-time visitor to Seattle with a budget of $200/day.
     ```
 
-    *Note*: If you encounter a rate limit error, wait a minute and try again.
+    *Note*: If you encounter a rate limit error, wait a minute and try again. Refreshing the page may also help.
 
 ### Summary
 
 In this lab step, you created an AI agent using the Microsoft Foundry portal and reviewed its response to a user query.
-
-
-

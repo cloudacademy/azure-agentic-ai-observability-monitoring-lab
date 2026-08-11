@@ -11,12 +11,12 @@ repos:
         exclude: template.yaml
       - id: check-json
       - id: check-added-large-files
-  - repo: https://github.com/odwyersoftware/brunette
-    rev: 0.2.8
-    hooks:
-      - id: brunette
-        types: [python]
-        files: "steps/"
+  # - repo: https://github.com/odwyersoftware/brunette
+  #   rev: 0.2.8
+  #   hooks:
+  #     - id: brunette
+  #       types: [python]
+  #       files: "steps/"
   - repo: https://github.com/crate-ci/typos
     rev: typos-dict-v0.12.4
     hooks:
