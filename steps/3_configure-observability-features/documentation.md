@@ -38,6 +38,8 @@ In this lab step, you will configure observability features for your AI agent us
 
     ![](./assets/image-7.png){: style="width:620px"}
 
+    *Note*: It can take a few minutes for the charts to populate with data. Refresh the page if you do not see any data after a few minutes.
+
     In addition to monitoring, Foundry also provides automated agent evaluations.
 
 1. Click **Settings** above the metrics dashboard:
@@ -59,6 +61,8 @@ In this lab step, you will configure observability features for your AI agent us
 1. Click **Next** to leave your agent selected as the target:
 
     ![](assets/targetAgent.png){: style="width:707px"}
+
+    *Note*: If your agent is not listed, refresh the page and try again.
 
 1. Click **Next** to leave the scope set to **Individual turns** which is suitable for single response agents:
 
