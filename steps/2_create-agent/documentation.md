@@ -26,6 +26,8 @@ In this lab step, you will connect Application Insights to the Foundry project a
 
     ![](./assets/image-7.png){: style="width:394px"}
 
+    *Note*: If you encounter a permission error when clicking **Connect**, wait a minute and refresh the page. It can take up to 10 minutes for access to propagate after starting the lab.
+
     Once connected, Foundry will begin sending agent traces to Application Insights. The connection will be listed under **Connected resources** tab:
 
     ![](./assets/image-8.png){: style="width:443px"}
