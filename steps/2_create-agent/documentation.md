@@ -60,6 +60,8 @@ In this lab step, you will connect Application Insights to the Foundry project a
 
     ![](./assets/image-9-9.png){: style="width:447px"}
 
+    *Note*: If **Save as agent** is grayed out, refresh the page.
+
     Once completed, the Foundry portal will display the agent playground:
 
     ![](./assets/image-9-10.png){: style="width:620px"}
